@@ -1,33 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../views/HomePage.vue';
 
-import New from '../views/NewTask.vue';
-import Task from '../views/TaskItem.vue';
-import Tasks from '../views/TasksView.vue';
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: () => import('../views/AboutPage.vue')
+  }
+];
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes: [
-    {
-      path: '/tasks',
-      component: Tasks,
-      alias: '/'
-    },
-    {
-      path: '/new',
-      component: New
-    },
-    {
-      path: '/task/:id',
-      component: Task,
-      props: true
-    },
-    {
-      path: '/:notFound(.*)',
-      redirect: '/'
-    }
-  ],
-  linkActiveClass: 'active',
-  linkExactActiveClass: 'active'
+  history: createWebHistory(process.env.BASE_URL),
+  routes
 });
 
 export default router;
