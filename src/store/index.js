@@ -1,7 +1,7 @@
 import { createStore, createLogger } from 'vuex';
-import auth from './modules/auth';
-import infoAlerts from './modules/info-alerts';
-import request from './modules/request';
+import auth from '@/store/modules/auth';
+import infoAlerts from '@/store/modules/info-alerts';
+import request from '@/store/modules/request';
 
 const plugins = [];
 

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import TheNavbar from "../components/TheNavbar.vue";
+import TheNavbar from "@/components/TheNavbar.vue";
 import AppAlert from '@/components/ui/AppAlert';
 
 export default {

@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import MainLayout from './layout/MainLayout.vue';
-import AuthLayout from './layout/AuthLayout.vue';
+import MainLayout from '@/layout/MainLayout.vue';
+import AuthLayout from '@/layout/AuthLayout.vue';
 
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';

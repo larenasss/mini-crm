@@ -14,10 +14,10 @@
 </template>
 
 <script>
-import AppPage from '../components/ui/AppPage';
-import RequestTable from '../components/request/RequestTable';
-import AppModal from '../components/ui/AppModal';
-import RequestModal from '../components/request/RequestModal';
+import AppPage from '@/components/ui/AppPage';
+import RequestTable from '@/components/request/RequestTable';
+import AppModal from '@/components/ui/AppModal';
+import RequestModal from '@/components/request/RequestModal';
 
 import { ref } from '@vue/reactivity';
 import { computed } from '@vue/runtime-core';
