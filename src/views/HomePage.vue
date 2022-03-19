@@ -7,7 +7,7 @@
 
     <teleport to="body">
       <app-modal v-if="modal" title="Создать заявку" @close="modal = false">
-        <request-modal></request-modal>
+        <request-modal @created="modal = false"></request-modal>
       </app-modal>
     </teleport>
   </app-page>
@@ -20,12 +20,17 @@ import AppModal from '../components/ui/AppModal';
 import RequestModal from '../components/request/RequestModal';
 
 import { ref } from '@vue/reactivity';
+import { computed } from '@vue/runtime-core';
+import store from '@/store';
 export default {
   setup() {
     const modal = ref(false);
 
+    const requests = computed(() => store.getters['requests']);
+
     return {
-      modal
+      modal,
+      requests
     };
   },
   components: { AppPage, RequestTable, AppModal, RequestModal }

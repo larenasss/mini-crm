@@ -12,13 +12,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+      <tr v-for="request in requests" :key="request.id">
+        <td> {{ request }} </td>
       </tr>
     </tbody>
   </table>

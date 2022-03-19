@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { useLoginForm } from '../use/login-from';
+import { useLoginForm } from '../use/login-form';
 export default {
   setup() {
     return { ...useLoginForm() };

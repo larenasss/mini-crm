@@ -1,6 +1,7 @@
 import { createStore, createLogger } from 'vuex';
 import auth from './modules/auth';
 import infoAlerts from './modules/info-alerts';
+import request from './modules/request';
 
 const plugins = [];
 
@@ -13,5 +14,5 @@ export default createStore({
   state: {},
   mutations: {},
   actions: {},
-  modules: { auth, infoAlerts }
+  modules: { auth, infoAlerts, request }
 });
