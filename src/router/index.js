@@ -34,14 +34,14 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  linkActiveClass: 'active',
+  linkExactActiveClass: 'active'
 });
 
 router.beforeEach((to, from, next) => {
   const requiredAuth = to.meta.auth;
   const isAuth = store.getters['auth/isAuthenticated'];
-
-  console.log(isAuth);
 
   if (requiredAuth && isAuth) {
     next();
