@@ -4,19 +4,14 @@
       <input type="text" placeholder="Начните писать имя" v-model="name">
     </div>
     <div class="form-control">
-      <select id="status" v-model="status">
-        <option disabled selected>Выберите статус</option>
-        <option value="done">Завершен</option>
-        <option value="cancelled">Отменен</option>
-        <option value="active">Активен</option>
-        <option value="pending">Выполняется</option>
-      </select>
+      <app-select-status v-model="status"></app-select-status>
     </div>
     <button class="btn warning" v-if="isActive" @click="reset">Очистить</button>
   </div>
 </template>
 
 <script>
+import AppSelectStatus from '@/components/ui/AppSelectStatus.vue';
 import { computed, ref, watch } from 'vue';
 export default {
   emits: ['update:modelValue'],
@@ -36,7 +31,7 @@ export default {
 
     const reset = () => {
       name.value = '';
-      status.value = null;
+      status.value = 'default';
     };
 
     return {
@@ -45,7 +40,8 @@ export default {
       isActive,
       reset
     };
-  }
+  },
+  components: { AppSelectStatus }
 };
 </script>
 

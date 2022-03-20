@@ -20,12 +20,7 @@
 
     <div class="form-control" :class="{ invalid: fError }">
       <label for="status">Статус</label>
-      <select id="status" v-model="status">
-        <option value="done">Завершен</option>
-        <option value="cancelled">Отменен</option>
-        <option value="active">Активен</option>
-        <option value="pending">Выполняется</option>
-      </select>
+      <app-select-status v-model="status"></app-select-status>
     </div>
 
     <button class="btn primary" :disabled="isSubmitting" type="submit">Сохранить</button>
@@ -33,6 +28,8 @@
 </template>
 
 <script>
+import AppSelectStatus from '@/components/ui/AppSelectStatus.vue';
+
 import { useRequestForm } from '@/use/request-form';
 import { useStore } from 'vuex';
 export default {
@@ -40,9 +37,10 @@ export default {
   setup(_, { emit }) {
     const store = useStore();
 
-    console.log(store);
-
     const submit = async values => {
+      if (!values.status) {
+        values.status = 'active';
+      }
       await store.dispatch('request/create', values);
       emit('created');
     };
@@ -50,7 +48,8 @@ export default {
     return {
       ...useRequestForm(submit)
     };
-  }
+  },
+  components: { AppSelectStatus }
 };
 </script>
 

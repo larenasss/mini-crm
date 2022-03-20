@@ -43,12 +43,12 @@ export default {
       return store.getters['request/requests']
         .filter(request => {
           if (filter.value.name) {
-            return request.fio.includes(filter.value.name);
+            return request.fio.toLowerCase().includes(filter.value.name.toLowerCase());
           }
           return request;
         })
         .filter(request => {
-          if (filter.value.status) {
+          if (filter.value.status && filter.value.status != 'default') {
             return filter.value.status === request.status;
           }
           return request;

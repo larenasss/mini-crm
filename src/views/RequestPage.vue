@@ -15,13 +15,7 @@
     </p>
 
     <div class="form-control">
-      <select id="status" v-model="status">
-        <option disabled selected>Выберите статус</option>
-        <option value="done">Завершен</option>
-        <option value="cancelled">Отменен</option>
-        <option value="active">Активен</option>
-        <option value="pending">Выполняется</option>
-      </select>
+      <app-select-status v-model="status"></app-select-status>
     </div>
 
     <button class="btn danger" @click="remove">Удалить</button>
@@ -36,6 +30,8 @@
 import AppPage from '@/components/ui/AppPage';
 import AppLoader from '@/components/ui/AppLoader';
 import AppStatus from '@/components/ui/AppStatus';
+import AppSelectStatus from '@/components/ui/AppSelectStatus.vue';
+
 import { useRoute, useRouter } from 'vue-router';
 import { computed, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
@@ -83,6 +79,6 @@ export default {
       currencyFormat: currency('re-Ru', {currency: 'RUB', style: 'currency'})
     };
   },
-  components: { AppPage, AppLoader, AppStatus }
+  components: { AppPage, AppLoader, AppStatus, AppSelectStatus }
 };
 </script>
