@@ -52,7 +52,3 @@ export default {
   components: { AppSelectStatus }
 };
 </script>
-
-<style>
-
-</style>
