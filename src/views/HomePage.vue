@@ -1,9 +1,12 @@
 <template>
-  <app-page title="Список заявок">
+  <app-loader v-if="loading"></app-loader>
+  <app-page v-else title="Список заявок">
     <template #header>
       <button class="btn primary" @click="modal = true">Создать</button>
     </template>
-    <request-table :requests="[]"></request-table>
+    <request-filter v-model="filter"></request-filter>
+
+    <request-table :requests="requests"></request-table>
 
     <teleport to="body">
       <app-modal v-if="modal" title="Создать заявку" @close="modal = false">
@@ -18,21 +21,47 @@ import AppPage from '@/components/ui/AppPage';
 import RequestTable from '@/components/request/RequestTable';
 import AppModal from '@/components/ui/AppModal';
 import RequestModal from '@/components/request/RequestModal';
+import RequestFilter from '@/components/request/RequestFilter';
+import AppLoader from '@/components/ui/AppLoader';
 
-import { ref } from '@vue/reactivity';
+import { ref, onMounted } from 'vue';
 import { computed } from '@vue/runtime-core';
 import store from '@/store';
 export default {
   setup() {
     const modal = ref(false);
+    const loading = ref(false);
+    const filter = ref({});
 
-    const requests = computed(() => store.getters['requests']);
+    onMounted(async () => {
+      loading.value = true;
+      await store.dispatch('request/load');
+      loading.value = false;
+    });
+
+    const requests = computed(() => {
+      return store.getters['request/requests']
+        .filter(request => {
+          if (filter.value.name) {
+            return request.fio.includes(filter.value.name);
+          }
+          return request;
+        })
+        .filter(request => {
+          if (filter.value.status) {
+            return filter.value.status === request.status;
+          }
+          return request;
+        });
+    });
 
     return {
       modal,
-      requests
+      requests,
+      loading,
+      filter
     };
   },
-  components: { AppPage, RequestTable, AppModal, RequestModal }
+  components: { AppPage, RequestTable, RequestFilter, AppModal, RequestModal, AppLoader }
 };
 </script>
