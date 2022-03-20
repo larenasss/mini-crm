@@ -57,6 +57,36 @@ export default {
           type: 'danger'
         }, { root: true });
       }
+    },
+    async remove({ dispatch }, id) {
+      try {
+        const token = store.getters['auth/token'];
+        await axios.delete(`/requests/${id}.json?auth=${token}`);
+        dispatch('infoAlerts/toggleMessage', {
+          value: 'Заявка удалена',
+          type: 'primary'
+        }, { root: true });
+      } catch (e) {
+        dispatch('infoAlerts/toggleMessage', {
+          value: e.message,
+          type: 'danger'
+        }, { root: true });
+      }
+    },
+    async update({ dispatch }, request) {
+      try {
+        const token = store.getters['auth/token'];
+        await axios.put(`/requests/${request.id}.json?auth=${token}`, request);
+        dispatch('infoAlerts/toggleMessage', {
+          value: 'Заявка обновлена',
+          type: 'primary'
+        }, { root: true });
+      } catch (e) {
+        dispatch('infoAlerts/toggleMessage', {
+          value: e.message,
+          type: 'danger'
+        }, { root: true });
+      }
     }
   },
   getters: {

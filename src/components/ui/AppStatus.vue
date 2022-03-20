@@ -6,6 +6,7 @@
 
 <script>
 import { ref } from '@vue/reactivity';
+import { watch } from '@vue/runtime-core';
 export default {
   props: {
     type: {
@@ -30,6 +31,11 @@ export default {
       done: 'Завершен',
       pending: 'Выполняется',
     };
+
+    watch(props, val => {
+      className.value = classesMap[val.type];
+      text.value = textMap[val.type];
+    });
 
     const className = ref(classesMap[props.type]);
     const text = ref(textMap[props.type]);
