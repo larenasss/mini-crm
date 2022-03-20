@@ -9,7 +9,7 @@
         <router-link to="/help">Помощь</router-link>
       </li>
       <li>
-        <a href="#">Сообщения</a>
+        <a href="#" @click.prevent="openSidebar">Сообщения</a>
       </li>
       <li>
         <a href="#" @click.prevent="logOut">Выход</a>
@@ -30,7 +30,8 @@ export default {
       logOut: () => {
         store.commit('auth/logOut');
         router.push('/auth');
-      }
+      },
+      openSidebar: () => store.commit('openSidebar')
     };
   },
 };

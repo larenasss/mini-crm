@@ -11,8 +11,19 @@ if (process.env.NODE_ENV === 'development') {
 
 export default createStore({
   plugins,
-  state: {},
-  mutations: {},
+  state() {
+    return {
+      sidebar: false
+    };
+  },
+  mutations: {
+    openSidebar(state) {
+      state.sidebar = true;
+    },
+    closeSidebar(state) {
+      state.sidebar = false;
+    }
+  },
   actions: {},
   modules: { auth, infoAlerts, request }
 });
